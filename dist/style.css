@@ -9,9 +9,9 @@ main { max-width:680px; margin:clamp(28px,7vw,75px) auto; padding:0 16px; }
 h1 { font-family:Georgia,serif; font-weight:500; font-size:clamp(2rem,6vw,3.45rem); line-height:1.05; margin:0 0 28px; letter-spacing:-.04em; }
 fieldset { margin:0 0 24px; padding:0; border:0; }
 legend, label[for] { font-size:.9rem; font-weight:700; margin-bottom:10px; }
-#forms,.actions { display:flex; flex-wrap:wrap; gap:8px; }
-#forms label { cursor:pointer; background:#fff; border:1px solid #cdd7cf; border-radius:999px; padding:8px 12px; font-size:.87rem; display:flex; gap:6px; align-items:center; }
-#forms label:has(:checked) { background:#e1ece3; }
+:is(#forms,#categories),.actions { display:flex; flex-wrap:wrap; gap:8px; }
+:is(#forms,#categories) label { cursor:pointer; background:#fff; border:1px solid #cdd7cf; border-radius:999px; padding:8px 12px; font-size:.87rem; display:flex; gap:6px; align-items:center; }
+:is(#forms,#categories) label:has(:checked) { background:#e1ece3; }
 input[type=checkbox] { accent-color:var(--green); margin:0; }
 .card { background:#fff; border:1px solid #deded4; border-radius:22px; padding:clamp(16px,5vw,36px); box-shadow:0 12px 32px #223c2b0b; }
 .prompt { display:flex; justify-content:space-between; align-items:center; gap:10px; text-transform:capitalize; font-size:.85rem; }

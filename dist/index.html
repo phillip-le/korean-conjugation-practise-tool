@@ -13,7 +13,8 @@
 <main>
   <h1>Korean conjugation practice</h1>
   <fieldset><legend>Forms to practise</legend><div id="forms"></div></fieldset>
-  <section class="card" aria-labelledby="word">
+  <fieldset><legend>Word types to include</legend><div id="categories"></div></fieldset>
+  <section id="question" class="card" aria-labelledby="word">
     <div class="prompt"><span id="target"></span><span id="kind"></span></div>
     <h2 id="word" lang="ko"></h2>
     <p id="meaning"></p>
@@ -29,6 +30,7 @@
       <div id="keyboard" hidden></div>
     </form>
   </section>
+  <p id="empty" role="status" hidden>No questions match these filters. Select a different form or word type.</p>
   <p id="error" role="alert"></p>
 </main>
 </body>

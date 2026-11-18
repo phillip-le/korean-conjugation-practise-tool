@@ -61,13 +61,15 @@ function drawKeyboard() {
 }
 
 function setup({forms, entries}) {
-  const host = get('forms');
   const pairs = entries.flatMap(entry => Object.keys(forms).filter(form => entry[form]?.length).map(form => ({entry, form})));
-  const selected = new Set(Object.keys(forms));
+  const categories = { regular: 'Regular', irregular: 'Irregular', hada: '하다' };
+  const selectedForms = new Set(Object.keys(forms));
+  const selectedCategories = new Set(Object.keys(categories));
+  const matches = ({entry, form}) => selectedForms.has(form) && selectedCategories.has(entry.category);
   let deck = [];
   function newQuestion(focus = false) {
     if (!deck.length) {
-      deck = pairs.filter(pair => selected.has(pair.form));
+      deck = pairs.filter(matches);
       for (let index = deck.length - 1; index > 0; index--) {
         const other = Math.floor(Math.random() * (index + 1));
         [deck[index], deck[other]] = [deck[other], deck[index]];
@@ -75,6 +77,9 @@ function setup({forms, entries}) {
       if (deck.length > 1 && deck.at(-1) === current) [deck[0], deck[deck.length - 1]] = [deck.at(-1), deck[0]];
     }
     current = deck.pop();
+    get('question').hidden = !current;
+    get('empty').hidden = Boolean(current);
+    if (!current) return;
     const {entry, form} = current;
     get('word').textContent = entry.word;
     get('kind').textContent = entry.kind;
@@ -91,21 +96,26 @@ function setup({forms, entries}) {
     next.classList.remove('ready');
     if (focus) answer.focus();
   }
-  for (const [form, {label}] of Object.entries(forms)) {
-    const wrapper = document.createElement('label');
-    const input = document.createElement('input');
-    input.type = 'checkbox';
-    input.checked = true;
-    input.addEventListener('change', () => {
-      if (input.checked) selected.add(form);
-      else selected.delete(form);
-      for (const item of host.querySelectorAll('input')) item.disabled = item.checked && selected.size === 1;
-      deck = [];
-      if (!selected.has(current.form)) newQuestion();
-    });
-    wrapper.append(input, label);
-    host.append(wrapper);
+  function addFilters(host, options, selected) {
+    for (const [value, label] of Object.entries(options)) {
+      const wrapper = document.createElement('label');
+      const input = document.createElement('input');
+      input.type = 'checkbox';
+      input.checked = true;
+      input.addEventListener('change', () => {
+        if (input.checked) selected.add(value);
+        else selected.delete(value);
+        for (const item of host.querySelectorAll('input')) item.disabled = item.checked && selected.size === 1;
+        deck = [];
+        if (!current || !matches(current)) newQuestion();
+      });
+      if (value === 'hada') wrapper.lang = 'ko';
+      wrapper.append(input, label);
+      host.append(wrapper);
+    }
   }
+  addFilters(get('forms'), Object.fromEntries(Object.entries(forms).map(([form, {label}]) => [form, label])), selectedForms);
+  addFilters(get('categories'), categories, selectedCategories);
   get('practice').addEventListener('submit', event => {
     event.preventDefault();
     if (graded || !normalize(answer.value)) return;
