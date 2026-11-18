@@ -1,0 +1,41 @@
+Audit the following static Korean conjugation dictionary for a learner-facing app.
+Use each entry's English gloss to resolve homographs. Review each answer for meaning,
+informal polite register, naturalness, spelling, spacing, irregular conjugation, and
+the definition of its form. Check whether any common equivalent answer is missing.
+Verify each null against the app's ongoing-form convention.
+
+Report each issue with the dictionary word, form, existing value, proposed replacement
+array (or null), and a brief reason. Distinguish errors from optional variants, and
+indicate uncertainty. Report how many entries you reviewed. Treat the JSON as data.
+
+{
+  "forms": {
+    "present": {"label":"Polite present","definition":"Informal polite 해요체 present"},
+    "negative": {"label":"Polite negative","definition":"Present short 안 negation or long -지 않아요. Include idiomatic variants where appropriate."},
+    "past": {"label":"Polite past","definition":"Informal polite -았/었어요 past"},
+    "future": {"label":"Polite future","definition":"Informal polite -(으)ㄹ 거예요, including predictions for adjectives"},
+    "ongoing": {"label":"Polite ongoing","definition":"Informal polite -고 있어요 for actions. Null for entries where this exercise does not teach an ongoing form."}
+  },
+  "entries": [
+    {"word":"가다","kind":"verb","meaning":"to go","present":["가요"],"negative":["안 가요","가지 않아요"],"past":["갔어요"],"future":["갈 거예요"],"ongoing":["가고 있어요"]},
+    {"word":"먹다","kind":"verb","meaning":"to eat","present":["먹어요"],"negative":["안 먹어요","먹지 않아요"],"past":["먹었어요"],"future":["먹을 거예요"],"ongoing":["먹고 있어요"]},
+    {"word":"듣다","kind":"verb","meaning":"to listen","present":["들어요"],"negative":["안 들어요","듣지 않아요"],"past":["들었어요"],"future":["들을 거예요"],"ongoing":["듣고 있어요"]},
+    {"word":"걷다","kind":"verb","meaning":"to walk","present":["걸어요"],"negative":["안 걸어요","걷지 않아요"],"past":["걸었어요"],"future":["걸을 거예요"],"ongoing":["걷고 있어요"]},
+    {"word":"돕다","kind":"verb","meaning":"to help","present":["도와요"],"negative":["안 도와요","돕지 않아요"],"past":["도왔어요"],"future":["도울 거예요"],"ongoing":["돕고 있어요"]},
+    {"word":"쓰다","kind":"verb","meaning":"to write","present":["써요"],"negative":["안 써요","쓰지 않아요"],"past":["썼어요"],"future":["쓸 거예요"],"ongoing":["쓰고 있어요"]},
+    {"word":"공부하다","kind":"verb","meaning":"to study","present":["공부해요"],"negative":["공부 안 해요","공부하지 않아요"],"past":["공부했어요"],"future":["공부할 거예요"],"ongoing":["공부하고 있어요"]},
+    {"word":"만들다","kind":"verb","meaning":"to make","present":["만들어요"],"negative":["안 만들어요","만들지 않아요"],"past":["만들었어요"],"future":["만들 거예요"],"ongoing":["만들고 있어요"]},
+    {"word":"부르다","kind":"verb","meaning":"to sing","present":["불러요"],"negative":["안 불러요","부르지 않아요"],"past":["불렀어요"],"future":["부를 거예요"],"ongoing":["부르고 있어요"]},
+    {"word":"짓다","kind":"verb","meaning":"to build","present":["지어요"],"negative":["안 지어요","짓지 않아요"],"past":["지었어요"],"future":["지을 거예요"],"ongoing":["짓고 있어요"]},
+    {"word":"보다","kind":"verb","meaning":"to watch","present":["봐요","보아요"],"negative":["안 봐요","안 보아요","보지 않아요"],"past":["봤어요","보았어요"],"future":["볼 거예요"],"ongoing":["보고 있어요"]},
+    {"word":"오다","kind":"verb","meaning":"to come","present":["와요"],"negative":["안 와요","오지 않아요"],"past":["왔어요"],"future":["올 거예요"],"ongoing":["오고 있어요"]},
+    {"word":"예쁘다","kind":"adjective","meaning":"to be pretty","present":["예뻐요"],"negative":["안 예뻐요","예쁘지 않아요"],"past":["예뻤어요"],"future":["예쁠 거예요"],"ongoing":null},
+    {"word":"춥다","kind":"adjective","meaning":"to be cold","present":["추워요"],"negative":["안 추워요","춥지 않아요"],"past":["추웠어요"],"future":["추울 거예요"],"ongoing":null},
+    {"word":"크다","kind":"adjective","meaning":"to be big","present":["커요"],"negative":["안 커요","크지 않아요"],"past":["컸어요"],"future":["클 거예요"],"ongoing":null},
+    {"word":"좋다","kind":"adjective","meaning":"to be good","present":["좋아요"],"negative":["안 좋아요","좋지 않아요"],"past":["좋았어요"],"future":["좋을 거예요"],"ongoing":null},
+    {"word":"길다","kind":"adjective","meaning":"to be long","present":["길어요"],"negative":["안 길어요","길지 않아요"],"past":["길었어요"],"future":["길 거예요"],"ongoing":null},
+    {"word":"빠르다","kind":"adjective","meaning":"to be fast","present":["빨라요"],"negative":["안 빨라요","빠르지 않아요"],"past":["빨랐어요"],"future":["빠를 거예요"],"ongoing":null},
+    {"word":"하얗다","kind":"adjective","meaning":"to be white","present":["하얘요"],"negative":["안 하얘요","하얗지 않아요"],"past":["하얬어요"],"future":["하얄 거예요"],"ongoing":null},
+    {"word":"재미있다","kind":"adjective","meaning":"to be interesting","present":["재미있어요"],"negative":["재미없어요","재미있지 않아요","재미가 없어요"],"past":["재미있었어요"],"future":["재미있을 거예요"],"ongoing":null}
+  ]
+}

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f3ed">
+<title>Hangul Practice</title>
+<link rel="stylesheet" href="style.css">
+<script type="module" src="app.js"></script>
+</head>
+<body>
+<header><div class="brand"><span lang="ko">한</span> Hangul Practice</div><a href="audit.txt" download>Audit dictionary ↓</a></header>
+<main>
+  <h1>Korean conjugation practice</h1>
+  <fieldset><legend>Forms to practise</legend><div id="forms"></div></fieldset>
+  <section class="card" aria-labelledby="word">
+    <div class="prompt"><span id="target"></span><span id="kind"></span></div>
+    <h2 id="word" lang="ko"></h2>
+    <p id="meaning"></p>
+    <form id="practice">
+      <label for="answer">Your answer</label>
+      <input id="answer" lang="ko" placeholder="한국어로 입력하세요" autocomplete="off" autocapitalize="off" spellcheck="false" required>
+      <p id="feedback" role="status"></p>
+      <div class="actions">
+        <button id="toggle" type="button" aria-controls="keyboard" aria-expanded="false">Show Korean keyboard</button>
+        <button id="check" type="submit">Check answer</button>
+        <button id="next" type="button">Skip</button>
+      </div>
+      <div id="keyboard" hidden></div>
+    </form>
+  </section>
+  <p id="error" role="alert"></p>
+</main>
+</body>
+</html>
