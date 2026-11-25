@@ -189,7 +189,7 @@ function setup({forms, entries}) {
   newQuestion();
 }
 try {
-  const response = await fetch('dictionary.json');
+  const response = await fetch('dictionary.json', {cache: 'no-cache'});
   if (!response.ok) throw new Error('Dictionary unavailable');
   setup(await response.json());
 } catch {
