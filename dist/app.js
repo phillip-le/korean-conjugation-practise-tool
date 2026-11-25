@@ -12,6 +12,37 @@ let current;
 let graded = false;
 const normalize = value => value.normalize('NFC').trim().replace(/\s+/gu, ' ');
 
+function explain(entry, form) {
+  const note = entry.explanations?.[form];
+  if (note) return note;
+
+  const stem = entry.word.slice(0, -1);
+  const introduction = `Drop 다 to get the stem ${stem}. `;
+  switch (form) {
+    case 'present':
+      return introduction + 'Add -아요 after ㅏ or ㅗ and -어요 after other vowels. 하다 becomes 해요.';
+    case 'past':
+      return introduction + 'Add -았어요 after ㅏ or ㅗ and -었어요 after other vowels. 하다 becomes 했어요.';
+    case 'negative':
+      return introduction + `Add -지 않아요, or put 안 before the polite present form ${entry.present[0]}.`;
+    case 'future': {
+      const finalConsonant = (stem.charCodeAt(stem.length - 1) - 0xac00) % 28;
+      const rule = finalConsonant === 0 ? 'Attach ㄹ to the final syllable, then add a space and 거예요.'
+        : finalConsonant === 8 ? 'The stem already ends in ㄹ, so add a space and 거예요.'
+        : 'The stem ends in a consonant, so add -을 거예요.';
+      return introduction + rule;
+    }
+    case 'ongoing':
+      return introduction + 'Attach -고 directly to the stem, then add a space and 있어요.';
+    case 'desire':
+      return introduction + 'Attach -고 directly to the stem, then add a space and 싶어요.';
+    case 'negativeDesire':
+      return introduction + 'Attach -고 directly to the stem, then add a space and 싶지 않아요. The -지 않아요 part negates 싶다.';
+    default:
+      return '';
+  }
+}
+
 function typeKey(key) {
   if (answer.readOnly) return;
   const start = answer.selectionStart;
@@ -84,7 +115,9 @@ function setup({forms, entries}) {
     get('word').textContent = entry.word;
     get('kind').textContent = entry.kind;
     get('meaning').textContent = entry.meaning;
-    get('target').textContent = forms[form].label;
+    const target = get('target');
+    target.dataset.form = form;
+    target.textContent = forms[form].label;
     feedback.textContent = '';
     delete feedback.dataset.result;
     answer.value = '';
@@ -99,6 +132,7 @@ function setup({forms, entries}) {
   function addFilters(host, options, selected) {
     for (const [value, label] of Object.entries(options)) {
       const wrapper = document.createElement('label');
+      if (host.id === 'forms') wrapper.dataset.form = value;
       const input = document.createElement('input');
       input.type = 'checkbox';
       input.checked = true;
@@ -126,7 +160,16 @@ function setup({forms, entries}) {
     expected.lang = 'ko';
     expected.textContent = answers.join(' / ');
     feedback.replaceChildren(correct ? 'Correct!' : 'Accepted answers · ');
-    if (!correct) feedback.append(expected);
+    if (!correct) {
+      feedback.append(expected);
+      const explanation = explain(current.entry, current.form);
+      if (explanation) {
+        const detail = document.createElement('span');
+        detail.className = 'explanation';
+        detail.textContent = explanation;
+        feedback.append(detail);
+      }
+    }
     graded = true;
     answer.readOnly = true;
     check.disabled = true;

@@ -13,9 +13,19 @@ legend, label[for] { font-size:.9rem; font-weight:700; margin-bottom:10px; }
 :is(#forms,#categories) label { cursor:pointer; background:#fff; border:1px solid #cdd7cf; border-radius:999px; padding:8px 12px; font-size:.87rem; display:flex; gap:6px; align-items:center; }
 :is(#forms,#categories) label:has(:checked) { background:#e1ece3; }
 input[type=checkbox] { accent-color:var(--green); margin:0; }
+[data-form="present"] { --form-ink:#235840; --form-fill:#d9f2e1; }
+[data-form="negative"] { --form-ink:#8b3029; --form-fill:#fbe0dc; }
+[data-form="past"] { --form-ink:#5b3682; --form-fill:#eddffb; }
+[data-form="future"] { --form-ink:#214d91; --form-fill:#dceaff; }
+[data-form="ongoing"] { --form-ink:#795000; --form-fill:#ffedbc; }
+[data-form="desire"] { --form-ink:#842957; --form-fill:#ffdef0; }
+[data-form="negativeDesire"] { --form-ink:#116066; --form-fill:#cceff0; }
+#forms label[data-form] { color:var(--form-ink); border-color:var(--form-ink); }
+#forms label[data-form]:has(:checked) { background:var(--form-fill); }
+#forms input { accent-color:var(--form-ink, var(--green)); }
 .card { background:#fff; border:1px solid #deded4; border-radius:22px; padding:clamp(16px,5vw,36px); box-shadow:0 12px 32px #223c2b0b; }
 .prompt { display:flex; justify-content:space-between; align-items:center; gap:10px; text-transform:capitalize; font-size:.85rem; }
-#target { color:#184c3e; background:#e4eee5; border-radius:6px; padding:6px 10px; font-weight:700; }
+#target { color:var(--form-ink, #184c3e); background:var(--form-fill, #e4eee5); border-radius:6px; padding:6px 10px; font-weight:700; }
 h2 { font-size:clamp(2.5rem,9vw,4.5rem); margin:14px 0 0; }
 #meaning { color:#53675e; margin:4px 0 28px; }
 label[for], #answer { display:block; }
@@ -23,6 +33,7 @@ label[for], #answer { display:block; }
 #feedback { min-height:1.5em; margin:8px 0 12px; overflow-wrap:anywhere; }
 #feedback[data-result="wrong"] { color:#912e26; }
 #feedback[data-result="correct"] { color:#185a38; }
+.explanation { display:block; margin-top:8px; color:#172e29; line-height:1.5; }
 button { border:1px solid #cdd7cf; background:#fff; color:inherit; border-radius:8px; padding:9px 12px; font:inherit; cursor:pointer; }
 button:hover { background:#e4eee5; }
 button:disabled { opacity:.55; cursor:default; }
